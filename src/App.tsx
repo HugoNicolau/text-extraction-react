@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">Transform your image in text</h1>
+      <h1 className="text-center mb-4">Transform Your Image into Text</h1>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="mb-3">
           <input type="file" accept="image/*" onChange={handleFileChange} className="form-control"/>

@@ -4,6 +4,17 @@ This is the frontend for a text extraction application. It allows users to uploa
 
 ---
 
+## Related Repositories
+
+- [Frontend Repository (React + Vite + TypeScript)](https://github.com/HugoNicolau/text-extraction-react)
+
+
+- [Backend Repository (NestJS + TypeScript)](https://github.com/HugoNicolau/text-extraction-nestjs)
+
+- [Backend Repository (FastAPI + Python)](https://github.com/HugoNicolau/text-extraction-py)
+
+---
+
 ## Features
 
 - Upload an image for text extraction.
@@ -27,7 +38,7 @@ Before running the project, ensure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/text-extraction-frontend.git
+   git clone https://github.com/HugoNicolau/text-extraction-frontend.git
    cd text-extraction-frontend
    ```
 

@@ -1,50 +1,132 @@
-# React + TypeScript + Vite
+# Text Extraction Frontend (React + Vite + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for a text extraction application. It allows users to upload an image and displays the extracted text using a NestJS backend and FastAPI service.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Upload an image for text extraction.
+- Display the extracted text.
+- Responsive design with Bootstrap (optional).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Before running the project, ensure you have the following installed:
+
+- Node.js (v18 or higher)
+- npm or yarn
+- NestJS backend running (for text extraction)
+
+---
+
+## Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/text-extraction-frontend.git
+   cd text-extraction-frontend
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+
+   Create a `.env` file in the root directory and add the following:
+
+   ```env
+   VITE_API_URL=http://localhost:3000
+   ```
+
+   Replace `http://localhost:3000` with the URL of your NestJS backend.
+
+---
+
+## Running the Project
+
+1. **Start the React app:**
+
+   ```bash
+   npm run dev
+   ```
+
+   The app will open at `http://localhost:5173`.
+
+2. **Test the app:**
+
+   - Upload an image using the file input.
+   - Click **Extract Text**.
+   - The extracted text will be displayed below the form.
+
+---
+
+## Project Structure
+
+```
+text-extraction-frontend/
+├── public/                  # Static assets
+│   └── vite.svg             # Vite logo (optional)
+├── src/                     # Source code
+│   ├── assets/              # Static assets (e.g., images, fonts)
+│   ├── components/          # React components
+│   ├── App.tsx              # Main application component
+│   ├── main.tsx             # Entry point
+│   ├── index.css            # Global styles
+│   └── vite-env.d.ts        # TypeScript types for Vite
+├── .env                     # Environment variables
+├── .gitignore               # Files to ignore in Git
+├── package.json             # Project dependencies
+├── tsconfig.json            # TypeScript configuration
+├── vite.config.ts           # Vite configuration
+└── README.md                # Project documentation
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Dependencies
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **axios:** For making HTTP requests to the NestJS backend.
+- **react:** The frontend framework.
+- **react-dom:** For rendering React components.
+- **react-router-dom:** For routing (optional).
+- **vite:** The build tool for the frontend.
+
+---
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- [React](https://reactjs.org/) for the frontend framework.
+- [Vite](https://vitejs.dev/) for the build tool.
+- [NestJS](https://nestjs.com/) for the backend.
+- [FastAPI](https://fastapi.tiangolo.com/) for the text extraction service.
+
+---
+
+## Contact
+
+For questions or feedback, please reach out to [Hugo Nicolau](mailto:nicolau.hugogiles@gmail.com).

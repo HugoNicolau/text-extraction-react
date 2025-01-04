@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #1a1a1a; /* Darker background */
+    --text-color: #f8f9fa; /* Light text for contrast */
+    --border-color: #444; /* Darker border */
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    --transition: all 0.3s ease;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top to avoid overflow issues */
+    background: linear-gradient(135deg, #1a1a1a, #000); /* Darker gradient */
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    overflow-y: auto; /* Allow scrolling */
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    padding: 30px;
+    background-color: #2d2d2d; /* Darker container background */
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+    transition: var(--transition);
+    margin: 20px; /* Add margin for better spacing */
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5); /* Darker shadow on hover */
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #333; /* Darker input background */
+    color: var(--text-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="file"]:hover {
+    border-color: var(--primary-color);
+}
+
+button.btn-primary {
+    width: 100%;
+    background-color: var(--primary-color);
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #fff;
+    transition: var(--transition);
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.btn-primary:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.alert-danger {
+    color: var(--error-color);
+    background-color: #442a2a; /* Darker error background */
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+pre.bg-light {
+    background-color: #333; /* Darker pre background */
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+    transition: var(--transition);
+    max-height: 400px; /* Limit height and add scroll */
+    overflow-y: auto;
+}
+
+pre.bg-light:hover {
+    box-shadow: var(--shadow);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="file"], button.btn-primary {
+        padding: 10px;
+    }
+}

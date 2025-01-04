@@ -38,7 +38,7 @@ Before running the project, ensure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/HugoNicolau/text-extraction-frontend.git
+   git clone https://github.com/HugoNicolau/text-extraction-react.git
    cd text-extraction-react
    ```
 

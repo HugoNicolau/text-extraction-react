@@ -11,6 +11,7 @@ const App: React.FC = () => {
   const [targetLanguage, setTargetLanguage] = useState<string>('en');
   const [language, setLanguage] = useState<string>('en');
   const [improveExtraction, setImproveExtraction] = useState<string>('no');
+  const [summarizeText, setSummarizeText] = useState<string>('no');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -33,6 +34,11 @@ const App: React.FC = () => {
   const handleImproveExtractionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setImproveExtraction(event.target.value);
   };
+
+  const handleSummarizeTextChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSummarizeText(event.target.value);
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!file) {
@@ -51,6 +57,9 @@ const App: React.FC = () => {
     }
     if (translate.toLowerCase() === 'yes') {
       formData.append('targetLanguage', targetLanguage);
+    }
+    if (summarizeText.toLowerCase() === 'yes') {
+      formData.append('summarizeText', summarizeText);
     }
 
     try {
@@ -110,6 +119,13 @@ const App: React.FC = () => {
         <div className="mb-3">
           <label htmlFor="improveExtraction" className="form-label">{language === 'en' ? 'Do you want to improve the text extraction with AI?' : 'Você quer melhorar a extração do texto com IA?'}</label>
           <select id="improveExtraction" value={improveExtraction} onChange={handleImproveExtractionChange} className="form-control">
+            <option value="no">{language === 'en' ? 'No' : 'Não'}</option>
+            <option value="yes">{language === 'en' ? 'Yes' : 'Sim'}</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="summarizeText" className="form-label">{language === 'en' ? 'Do you want to summarize the text?' : 'Você quer resumir o texto?'}</label>
+          <select id="summarizeText" value={summarizeText} onChange={handleSummarizeTextChange} className="form-control">
             <option value="no">{language === 'en' ? 'No' : 'Não'}</option>
             <option value="yes">{language === 'en' ? 'Yes' : 'Sim'}</option>
           </select>

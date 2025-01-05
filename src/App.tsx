@@ -9,7 +9,8 @@ const App: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [translate, setTranslate] = useState<string>('no');
   const [targetLanguage, setTargetLanguage] = useState<string>('en');
-  const [language, setLanguage] = useState<string>('en'); // Estado para o idioma
+  const [language, setLanguage] = useState<string>('en');
+  const [improveExtraction, setImproveExtraction] = useState<string>('no');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -29,6 +30,9 @@ const App: React.FC = () => {
     setLanguage(event.target.value);
   };
 
+  const handleImproveExtractionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setImproveExtraction(event.target.value);
+  };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!file) {
@@ -41,8 +45,13 @@ const App: React.FC = () => {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('translate', translate);
-    formData.append('targetLanguage', targetLanguage);
+
+    if (improveExtraction.toLowerCase() === 'yes') {
+      formData.append('improveExtraction', improveExtraction);
+    }
+    if (translate.toLowerCase() === 'yes') {
+      formData.append('targetLanguage', targetLanguage);
+    }
 
     try {
       const response = await axios.post(
@@ -74,7 +83,7 @@ const App: React.FC = () => {
       <h1 className="text-center mb-4">{language === 'en' ? 'Transform Your Image into Text' : 'Transforme Sua Imagem em Texto'}</h1>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="mb-3">
-          <input type="file" accept="image/*" onChange={handleFileChange} className="form-control"/>
+          <input type="file" accept="image/*" onChange={handleFileChange} className="form-control" />
         </div>
         <div className="mb-3">
           <label htmlFor="translate" className="form-label">{language === 'en' ? 'Do you want to translate?' : 'Você quer traduzir?'}</label>
@@ -98,6 +107,13 @@ const App: React.FC = () => {
             </select>
           </div>
         )}
+        <div className="mb-3">
+          <label htmlFor="improveExtraction" className="form-label">{language === 'en' ? 'Do you want to improve the text extraction with AI?' : 'Você quer melhorar a extração do texto com IA?'}</label>
+          <select id="improveExtraction" value={improveExtraction} onChange={handleImproveExtractionChange} className="form-control">
+            <option value="no">{language === 'en' ? 'No' : 'Não'}</option>
+            <option value="yes">{language === 'en' ? 'Yes' : 'Sim'}</option>
+          </select>
+        </div>
         <button type="submit" className="btn btn-primary" disabled={isLoading}>
           {isLoading ? (language === 'en' ? 'Extracting...' : 'Extraindo...') : (language === 'en' ? 'Extract text' : 'Extrair texto')}
         </button>

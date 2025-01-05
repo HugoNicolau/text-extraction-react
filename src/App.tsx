@@ -83,7 +83,7 @@ const App: React.FC = () => {
   return (
     <div className="container mt-5">
       <div className="mb-4">
-        <label htmlFor="language" className="form-label">{language === 'en' ? 'Select Language' : 'Selecione o Idioma'}</label>
+        <label htmlFor="language" className="form-label">{language === 'en' ? 'Select the website Language' : 'Selecione o Idioma do site'}</label>
         <select id="language" value={language} onChange={handleLanguageChange} className="form-control">
           <option value="en">English</option>
           <option value="pt">Português</option>
@@ -95,7 +95,7 @@ const App: React.FC = () => {
           <input type="file" accept="image/*" onChange={handleFileChange} className="form-control" />
         </div>
         <div className="mb-3">
-          <label htmlFor="translate" className="form-label">{language === 'en' ? 'Do you want to translate?' : 'Você quer traduzir?'}</label>
+          <label htmlFor="translate" className="form-label">{language === 'en' ? 'Do you want to translate with AI?' : 'Você quer traduzir usando IA?'}</label>
           <select id="translate" value={translate} onChange={handleTranslateChange} className="form-control">
             <option value="no">{language === 'en' ? 'No' : 'Não'}</option>
             <option value="yes">{language === 'en' ? 'Yes' : 'Sim'}</option>
@@ -124,7 +124,7 @@ const App: React.FC = () => {
           </select>
         </div>
         <div className="mb-3">
-          <label htmlFor="summarizeText" className="form-label">{language === 'en' ? 'Do you want to summarize the text?' : 'Você quer resumir o texto?'}</label>
+          <label htmlFor="summarizeText" className="form-label">{language === 'en' ? 'Do you want to summarize the text with AI?' : 'Você quer resumir o texto usando IA?'}</label>
           <select id="summarizeText" value={summarizeText} onChange={handleSummarizeTextChange} className="form-control">
             <option value="no">{language === 'en' ? 'No' : 'Não'}</option>
             <option value="yes">{language === 'en' ? 'Yes' : 'Sim'}</option>

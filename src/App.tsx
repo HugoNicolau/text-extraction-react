@@ -1,10 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
 import './App.css';
+import { TextExtractionResult } from "./types";
 
 const App: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [extractedText, setExtractedText] = useState<string>('');
+  const [extractedText, setExtractedText] = useState<TextExtractionResult>({
+    originalExtraction: '',
+    improvedExtraction: '',
+    translatedText: '',
+    summarizedText: '',
+    finalText: '',
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [translate, setTranslate] = useState<string>('no');
@@ -12,6 +19,14 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<string>('en');
   const [improveExtraction, setImproveExtraction] = useState<string>('no');
   const [summarizeText, setSummarizeText] = useState<string>('no');
+
+  const translations: { [K in Extract<keyof TextExtractionResult, string>]: string } = {
+    originalExtraction: 'Extração Original',
+    improvedExtraction: 'Extração Melhorada',
+    translatedText: 'Texto Traduzido',
+    summarizedText: 'Texto Resumido',
+    finalText: 'Texto Final'
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -72,12 +87,36 @@ const App: React.FC = () => {
           },
         },
       );
-      setExtractedText(response.data);
+      setExtractedText(response.data as TextExtractionResult);
     } catch (error) {
       setError(language === 'en' ? 'Failed to extract text. Please try again later.' : 'Falha ao extrair o texto. Por favor, tente novamente mais tarde.');
     } finally {
       setIsLoading(false);
     }
+
+  };
+  interface TextItem {
+    key: Extract<keyof TextExtractionResult, string>;
+    content: string;
+  }
+  const getNonEmptyTexts = (): TextItem[] => {
+    const texts: TextItem[] = [];
+    if (extractedText.originalExtraction !== '') {
+      texts.push({ key: 'originalExtraction', content: extractedText.originalExtraction });
+    }
+    if (extractedText.improvedExtraction !== '') {
+      texts.push({ key: 'improvedExtraction', content: extractedText.improvedExtraction });
+    }
+    if (extractedText.translatedText !== '') {
+      texts.push({ key: 'translatedText', content: extractedText.translatedText });
+    }
+    if (extractedText.summarizedText !== '') {
+      texts.push({ key: 'summarizedText', content: extractedText.summarizedText });
+    }
+    if (extractedText.finalText !== '') {
+      texts.push({ key: 'finalText', content: extractedText.finalText });
+    }
+    return texts;
   };
 
   return (
@@ -135,10 +174,18 @@ const App: React.FC = () => {
         </button>
       </form>
       {error && <div className="alert alert-danger">{error}</div>}
-      {extractedText && (
-        <div className="mt-4">
-          <h2>{language === 'en' ? 'Extracted Text:' : 'Texto Extraído:'}</h2>
-          <pre className="bg-light p-3">{extractedText}</pre>
+      {getNonEmptyTexts().length > 0 && (
+        <div className="response-container mt-4">
+          {getNonEmptyTexts().map(item => (
+            <div key={item.key} className="text-block">
+              <h2>
+                {language === 'en'
+                  ? (item.key as string).replace(/([A-Z])/g, ' $1').trim()
+                  : translations[item.key]}
+              </h2>
+              <pre className="bg-light p-3">{item.content}</pre>
+            </div>
+          ))}
         </div>
       )}
     </div>
